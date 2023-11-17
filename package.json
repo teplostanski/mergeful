@@ -1,0 +1,45 @@
+{
+  "name": "mergeful",
+  "version": "0.1.0-alpha.0",
+  "description": "Simplify the process of merging and including text data in your project. The mergeful npm package offers a convenient way to insert data into initialization files with customizable options. Whether you need to update configuration files, generate dynamic content, or manage project templates, mergeful streamlines the workflow, making it easy and efficient.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "keywords": [
+    "merge",
+    "include",
+    "text",
+    "file",
+    "configuration",
+    "initialization",
+    "update",
+    "dynamic",
+    "content",
+    "template",
+    "preprocess",
+    "label",
+    "generate",
+    "configuration files",
+    "npm-package",
+    "project-tool",
+    "utility",
+    "developer-tools",
+    "file-handling",
+    "data-processing"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/mock-fs": "^4.13.4",
+    "@types/tmp": "^0.2.6",
+    "fs-extra": "^11.1.1",
+    "jest": "^29.7.0",
+    "mock-fs": "^5.2.0",
+    "tmp": "^0.2.1",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
+  }
+}
