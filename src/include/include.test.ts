@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { include } from './include';
+import { ERROR_MESSAGE_FILE_DOES_NOT_EXIST, ERROR_MESSAGE_PREFIX } from './include.constants';
 
 jest.mock('fs');
 
@@ -45,7 +46,7 @@ describe('include function', () => {
       .spyOn(fs, 'readFileSync')
       .mockImplementation(() => {
         throw new Error(
-          `ENOENT: no such file or directory, open '${PATH_TO_MOCK_FILE}'`
+          ERROR_MESSAGE_FILE_DOES_NOT_EXIST(PATH_TO_MOCK_FILE)
         );
       });
 
@@ -60,7 +61,7 @@ describe('include function', () => {
 
     // Ожидаем, что console.error был вызван с правильным сообщением об ошибке
     expect(mockConsoleError).toHaveBeenCalledWith(
-      `Error: File does not exist: ${PATH_TO_MOCK_FILE}`
+      `${ERROR_MESSAGE_PREFIX}${ERROR_MESSAGE_FILE_DOES_NOT_EXIST(PATH_TO_MOCK_FILE)}`
     );
 
     // Проверяем, что mockRestore вызывается, чтобы не влиять на другие тесты

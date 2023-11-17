@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { ERROR_FILE_DOES_NOT_EXIST, ERROR_PREFIX, ERROR_TEXT_OR_PATH_REQUIRED, ERROR_UNKNOWN_READ, ERROR_UNKNOWN_WRITE, ERROR_WRITE_FILE, LOG_FILE_GENERATED_SUCCESSFULLY } from './include.constants';
+import { ERROR_MESSAGE_FILE_DOES_NOT_EXIST, ERROR_MESSAGE_PREFIX, ERROR_MESSAGE_TEXT_OR_PATH_REQUIRED, ERROR_MESSAGE_UNKNOWN_READ, ERROR_MESSAGE_UNKNOWN_WRITE, ERROR_MESSAGE_WRITE_FILE, LOG_FILE_GENERATED_SUCCESSFULLY } from './include.constants';
 
 interface CustomError {
   message: string;
@@ -40,7 +40,7 @@ export function readDataFromFile(data: string): string {
   if (fs.existsSync(data)) {
     return fs.readFileSync(data, 'utf-8');
   } else {
-    throw new Error(ERROR_FILE_DOES_NOT_EXIST(data));
+    throw new Error(ERROR_MESSAGE_FILE_DOES_NOT_EXIST(data));
   }
 }
 
@@ -83,10 +83,10 @@ export function writeToFile(fileName: string, content: string): void {
 export function handleWriteError(error: unknown): void {
   if (error instanceof Error) {
     // Critical error during file writing, throw to signal a critical failure.
-    throw new Error(ERROR_PREFIX + ERROR_WRITE_FILE(error.message));
+    throw new Error(ERROR_MESSAGE_PREFIX + ERROR_MESSAGE_WRITE_FILE(error.message));
   } else {
     // Unknown error during file writing, throw to signal a critical failure.
-    throw new Error(ERROR_PREFIX + ERROR_UNKNOWN_WRITE);
+    throw new Error(ERROR_MESSAGE_PREFIX + ERROR_MESSAGE_UNKNOWN_WRITE);
   }
 }
 
@@ -100,10 +100,10 @@ export function handleReadError(error: unknown): void {
     const customError: CustomError = {
       message: error.message,
     };
-    console.error(ERROR_PREFIX + customError.message);
+    console.error(ERROR_MESSAGE_PREFIX + customError.message);
   } else {
     // Unknown error during file reading, log to console and continue execution.
-    console.error(ERROR_PREFIX + ERROR_UNKNOWN_READ);
+    console.error(ERROR_MESSAGE_PREFIX + ERROR_MESSAGE_UNKNOWN_READ);
   }
 }
 
@@ -117,7 +117,7 @@ export function include(options: IncludeOptions): void {
   try {
     // Check if either "text" or "path" is provided
     if (!options.data.text && !options.data.path) {
-      throw new Error(ERROR_PREFIX + ERROR_TEXT_OR_PATH_REQUIRED);
+      throw new Error(ERROR_MESSAGE_PREFIX + ERROR_MESSAGE_TEXT_OR_PATH_REQUIRED);
     }
 
     // Read data from file or use provided data
@@ -126,7 +126,7 @@ export function include(options: IncludeOptions): void {
     } else if (options.data.path != null && options.data.path !== '') {
       initData = readDataFromFile(options.data.path);
     } else {
-      throw new Error(ERROR_PREFIX + ERROR_TEXT_OR_PATH_REQUIRED);
+      throw new Error(ERROR_MESSAGE_PREFIX + ERROR_MESSAGE_TEXT_OR_PATH_REQUIRED);
     }
     
 
